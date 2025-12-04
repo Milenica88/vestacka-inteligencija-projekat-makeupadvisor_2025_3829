@@ -1,0 +1,11 @@
+(ns vestacka_inteligencija_projekat_makeupadvisor_2025_3829.core)
+
+(defn recommend-foundation
+  "Vraca preporuku za puder na osnovu tipa koze"
+  [skin-type]
+  (cond
+    (= skin-type "suva") "Hydrating foundation"
+    (= skin-type "masna") "Oil-free matte foundation"
+    (= skin-type "mesovita") "Semi-matte foundation"
+    (= skin-type "osetljiva") "Hypoallergenic foundation"
+    :else "Universal lightweight foundation"))
