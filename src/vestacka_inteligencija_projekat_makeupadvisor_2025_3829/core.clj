@@ -1,4 +1,4 @@
-(ns vestacka_inteligencija_projekat_makeupadvisor_2025_3829.core)
+(ns vestacka-inteligencija-projekat-makeupadvisor_2025_3829.core)
 
 (defn recommend-foundation
   "Vraca preporuku za puder na osnovu tipa koze"
@@ -19,4 +19,22 @@
   (let [avg (/ (reduce + procenti) (count procenti))]
     (int (* populacija avg))))
 
+(defn recommend-lipstick
+  [skin-tone]
+  (cond
+    (= skin-tone "svetao")  "Rosy pink, Soft coral"
+    (= skin-tone "neutralan") "Nude rose, Mauve"
+    (= skin-tone "taman")   "Deep berry, Burgundy"
+    :else "Universal nude"))
 
+(defn duzina-stringova-ruzeva
+  [ruzevi]
+  (reduce (fn [acc name]
+            (+ acc (count name)))
+          0
+          ruzevi))
+
+(defn pretvori-u-velika
+  [ruzevi]
+  (map clojure.string/upper-case
+       (filter identity ruzevi)))

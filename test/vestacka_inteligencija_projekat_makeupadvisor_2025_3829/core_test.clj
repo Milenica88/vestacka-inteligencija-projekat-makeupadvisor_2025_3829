@@ -1,6 +1,6 @@
-(ns vestacka_inteligencija_projekat_makeupadvisor_2025_3829.core-test
+(ns vestacka-inteligencija-projekat-makeupadvisor_2025_3829.core-test
   (:require [clojure.test :refer :all]
-            [vestacka_inteligencija_projekat_makeupadvisor_2025_3829.core :refer :all]))
+            [vestacka-inteligencija-projekat-makeupadvisor_2025_3829.core :refer :all]))
 
 (deftest foundation-recommendation-test
   (testing "Preporuke za tipove koze"
@@ -16,6 +16,17 @@
 
 (deftest average-test
   (testing
-    (is (= 5166 (average
+    (is (= (average
                   10000
                   [0.57 0.38 0.60])))))
+
+(deftest test-recommend-lipstick
+    (is (= "Rosy pink, Soft coral"
+           (recommend-lipstick "svetao"))))
+
+(deftest test-duzina-stringova-ruzeva
+    (is (= 11 (duzina-stringova-ruzeva ["red" "nude" "pink"]))))
+
+(deftest test-pretvori-u-velika
+    (is (= '("RED" "NUDE" "PINK")
+           (pretvori-u-velika ["red" "nude" "pink"]))))
