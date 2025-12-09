@@ -30,3 +30,7 @@
 (deftest test-pretvori-u-velika
     (is (= '("RED" "NUDE" "PINK")
            (pretvori-u-velika ["red" "nude" "pink"]))))
+
+(deftest test-ubaci-ruzeve
+    (is (= ["a" "RUZ" "b" "RUZ" "c"]
+           (ubaci-ruzeve "RUZ" ["a" "b" "c"]))))

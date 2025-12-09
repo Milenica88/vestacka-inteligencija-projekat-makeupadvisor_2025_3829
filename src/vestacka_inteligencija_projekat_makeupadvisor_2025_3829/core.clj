@@ -38,3 +38,11 @@
   [ruzevi]
   (map clojure.string/upper-case
        (filter identity ruzevi)))
+
+(defn ubaci-ruzeve
+  [ruz sekvenca]
+  (pop
+    (reduce (fn [acc x]
+              (conj acc x ruz))
+            []
+            sekvenca)))
