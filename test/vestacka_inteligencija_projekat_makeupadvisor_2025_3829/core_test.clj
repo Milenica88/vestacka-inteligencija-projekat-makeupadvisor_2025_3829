@@ -34,3 +34,8 @@
 (deftest test-ubaci-ruzeve
     (is (= ["a" "RUZ" "b" "RUZ" "c"]
            (ubaci-ruzeve "RUZ" ["a" "b" "c"]))))
+
+(deftest test-dodaj-preporuku
+  (let [novi-db (dodaj-preporuku makeup-db :suva :svetao "Hydrating foundation")]
+    (is (= (get-in novi-db [:suva :svetao])
+           ["Hydrating foundation"]))))

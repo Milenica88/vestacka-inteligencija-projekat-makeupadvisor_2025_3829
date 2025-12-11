@@ -1,4 +1,6 @@
-(ns vestacka-inteligencija-projekat-makeupadvisor_2025_3829.core)
+(ns vestacka-inteligencija-projekat-makeupadvisor_2025_3829.core
+  (:require [clojure.test :refer [deftest is run-tests]]))
+
 
 (defn recommend-foundation
   "Vraca preporuku za puder na osnovu tipa koze"
@@ -27,6 +29,17 @@
     (= skin-tone "taman")   "Deep berry, Burgundy"
     :else "Universal nude"))
 
+(def makeup-db
+  {:suva    {:svetao [] :neutralan [] :taman []}
+   :masna   {:svetao [] :neutralan [] :taman []}
+   :mesovita {:svetao [] :neutralan [] :taman []}})
+
+(defn dodaj-preporuku
+  [db tip-koze ton-proizvod proizvod]
+  (assoc-in db [tip-koze ton-proizvod] (conj (get-in db [tip-koze ton-proizvod]) proizvod)))
+
+
+
 (defn duzina-stringova-ruzeva
   [ruzevi]
   (reduce (fn [acc name]
@@ -46,3 +59,5 @@
               (conj acc x ruz))
             []
             sekvenca)))
+
+
