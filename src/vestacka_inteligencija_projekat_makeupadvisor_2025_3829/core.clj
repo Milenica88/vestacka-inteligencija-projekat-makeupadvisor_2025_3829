@@ -1,5 +1,5 @@
 (ns vestacka-inteligencija-projekat-makeupadvisor_2025_3829.core
-  (:require [clojure.test :refer [deftest is run-tests]]))
+  :require [clojure.test :refer [deftest is run-tests]])
 
 
 (defn recommend-foundation
