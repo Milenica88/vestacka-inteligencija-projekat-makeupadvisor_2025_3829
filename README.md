@@ -4,7 +4,7 @@ Web app that recommends makeup products and styles based on skin type, undertone
 
 ## Demo
 
-![Demo](docs/demo.gif)
+![Demo](demo.gif)
 
 ## How it works
 
