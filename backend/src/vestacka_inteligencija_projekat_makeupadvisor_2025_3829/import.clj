@@ -13,9 +13,7 @@
     (string? v) (try (Double/parseDouble v) (catch Exception _ nil))
     :else nil))
 
-(defn- normalize
-  "Reduces a product from the Makeup API format to the internal shape."
-  [p]
+(defn- normalize [p]
   {:id           (:id p)
    :brand        (:brand p)
    :name         (:name p)
@@ -27,26 +25,19 @@
    :tag_list     (vec (:tag_list p))
    :colors       (mapv :hex_value (:product_colors p))})
 
-(defn fetch-from-api
-  "Returns a list of normalized products from the API, or throws."
-  []
+(defn fetch-from-api []
   (->> (http/get makeup-url {:as :json
                              :socket-timeout 30000
                              :connection-timeout 30000})
        :body
        (map normalize)))
 
-(defn load-seed
-  "Loads the local fallback catalog (already in the internal shape)."
-  []
+(defn load-seed []
   (-> (io/resource "seed/products.edn")
       slurp
       edn/read-string))
 
-(defn ensure-catalog!
-  "Makes sure the DB is initialized and the catalog is not empty.
-   Returns the number of loaded products (or nil if already populated)."
-  []
+(defn ensure-catalog! []
   (db/init!)
   (when (zero? (db/count-products))
     (let [products (try
