@@ -2,6 +2,10 @@
 
 Web app that recommends makeup products and styles based on skin type, undertone, tone, preferences, and occasion. It combines a rule-based engine for style advice with content-based scoring to rank products.
 
+## Demo
+
+![Demo](docs/demo.gif)
+
 ## How it works
 
 1. **Import** – Loads a product catalog from the Makeup API and falls back to a local seed file when the API is unavailable.
@@ -70,11 +74,3 @@ skin-tone    fair | medium | deep
 occasion     everyday | work | evening | party | wedding
 preferences  any of: vegan, cruelty free, matte, dewy, budget, longwear
 ```
-
-## Example
-
-```
-curl -X POST http://localhost:3001/recommend -H "Content-Type: application/json" -d "{\"skin-type\":\"oily\",\"undertone\":\"warm\",\"skin-tone\":\"fair\",\"occasion\":\"evening\",\"preferences\":[\"vegan\",\"matte\"]}"
-```
-
-Returns the recommended style (foundation, lipstick, blush, eyes) and the top-ranked products, each with a match score and the reasons it was recommended.
