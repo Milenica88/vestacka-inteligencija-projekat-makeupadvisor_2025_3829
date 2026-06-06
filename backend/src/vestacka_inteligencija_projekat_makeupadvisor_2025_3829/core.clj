@@ -1,63 +1,15 @@
 (ns vestacka-inteligencija-projekat-makeupadvisor_2025_3829.core
-  :require [clojure.test :refer [deftest is run-tests]])
+
+  (:require [vestacka-inteligencija-projekat-makeupadvisor_2025_3829.engine :as engine]
+            [vestacka-inteligencija-projekat-makeupadvisor_2025_3829.db :as db]))
 
 
-(defn recommend-foundation
-  "Vraca preporuku za puder na osnovu tipa koze"
-  [skin-type]
-  (cond
-    (= skin-type "suva") "Hydrating foundation"
-    (= skin-type "masna") "Oil-free matte foundation"
-    (= skin-type "mesovita") "Semi-matte foundation"
-    (= skin-type "osetljiva") "Hypoallergenic foundation"
-    :else "Universal lightweight foundation"))
+(def recommend-foundation engine/recommend-foundation)
+(def recommend-lipstick   engine/recommend-lipstick)
 
-(defn shade
-  [podton svetlina]
-  (int (max 1 (min 10 (+ podton svetlina)))))
-
-(defn average
-  [populacija procenti]
-  (let [avg (/ (reduce + procenti) (count procenti))]
-    (int (* populacija avg))))
-
-(defn recommend-lipstick
-  [skin-tone]
-  (cond
-    (= skin-tone "svetao")  "Rosy pink, Soft coral"
-    (= skin-tone "neutralan") "Nude rose, Mauve"
-    (= skin-tone "taman")   "Deep berry, Burgundy"
-    :else "Universal nude"))
-
-(def makeup-db
-  {:suva    {:svetao [] :neutralan [] :taman []}
-   :masna   {:svetao [] :neutralan [] :taman []}
-   :mesovita {:svetao [] :neutralan [] :taman []}})
-
-(defn dodaj-preporuku
-  [db tip-koze ton-proizvod proizvod]
-  (assoc-in db [tip-koze ton-proizvod] (conj (get-in db [tip-koze ton-proizvod]) proizvod)))
-
-
-
-(defn duzina-stringova-ruzeva
-  [ruzevi]
-  (reduce (fn [acc name]
-            (+ acc (count name)))
-          0
-          ruzevi))
-
-(defn pretvori-u-velika
-  [ruzevi]
-  (map clojure.string/upper-case
-       (filter identity ruzevi)))
-
-(defn ubaci-ruzeve
-  [ruz sekvenca]
-  (pop
-    (reduce (fn [acc x]
-              (conj acc x ruz))
-            []
-            sekvenca)))
-
-
+(defn recommend
+  [request]
+  (let [products (db/all-products)
+        result   (engine/advise request products)]
+    (db/save-recommendation! request result)
+    result))
