@@ -319,7 +319,5 @@ makeupadvisor/
 
 1. Makeup API — http://makeup-api.herokuapp.com/api/v1/products.json
 2. Recommender systems (content-based filtering) — https://en.wikipedia.org/wiki/Recommender_system
-3. Rule-based / expert systems — https://en.wikipedia.org/wiki/Expert_system
-4. Clojure — https://clojure.org/
-5. Ring — https://github.com/ring-clojure/ring
-6. next.jdbc — https://github.com/seancorfield/next-jdbc
+3. Clojure — https://clojure.org/
+4. next.jdbc — https://github.com/seancorfield/next-jdbc
