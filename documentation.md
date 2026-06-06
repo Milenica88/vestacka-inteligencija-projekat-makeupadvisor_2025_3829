@@ -1,4 +1,4 @@
-# AI Makeup Advisor — Project Documentation
+# Makeup Advisor — Project Documentation
 
 **Faculty of Organizational Sciences, University of Belgrade**
 Course: *Tools and Methods of Artificial Intelligence and Software Engineering*
@@ -9,7 +9,7 @@ Course: *Tools and Methods of Artificial Intelligence and Software Engineering*
 
 1. [Introduction](#1-introduction)
 2. [System Architecture](#2-system-architecture)
-   - [2.1 Recommendation Engine (AI core)](#21-recommendation-engine-ai-core)
+   - [2.1 Recommendation Engine](#21-recommendation-engine)
    - [2.2 Persistence Layer](#22-persistence-layer)
    - [2.3 Catalog Import](#23-catalog-import)
    - [2.4 Web Layer (REST API)](#24-web-layer-rest-api)
@@ -24,7 +24,7 @@ Course: *Tools and Methods of Artificial Intelligence and Software Engineering*
 
 ## 1. Introduction
 
-**AI Makeup Advisor** is a web application that gives personalized makeup recommendations based on a user profile: skin type, undertone, skin tone (depth), personal preferences, and the occasion. The goal is to take a large catalog of products and surface the ones that best match a specific user, while also suggesting a complete style (foundation, lipstick, blush, and eye makeup).
+**Makeup Advisor** is a web application that gives personalized makeup recommendations based on a user profile: skin type, undertone, skin tone (depth), personal preferences, and the occasion. The goal is to take a large catalog of products and surface the ones that best match a specific user, while also suggesting a complete style (foundation, lipstick, blush, and eye makeup).
 
 Choosing makeup is a problem with many variables — the same shade does not suit every skin tone, a matte foundation does not suit dry skin, and the right choice also depends on the occasion (an everyday look versus a formal one). With a huge number of products on the market, manual searching becomes impractical, which motivates an automated, personalized recommendation system.
 
@@ -33,9 +33,9 @@ The application solves this by combining two artificial intelligence approaches:
 - **Rule-based (expert) system** — domain knowledge about what suits which skin type is encoded as a set of rules.
 - **Content-based recommender** — each product is scored according to how well it matches the user's request, and products are ranked by that score.
 
-Both are de-facto standard techniques: content-based filtering powers many commercial recommender systems (Netflix, Spotify, Amazon), while rule-based expert systems are one of the oldest branches of AI.
+Both are de-facto standard techniques: content-based filtering powers many commercial recommender systems (Netflix, Spotify, Amazon).
 
-Alongside the AI aspect, the project applies software engineering principles: a layered architecture with clear separation of concerns, data persistence, a REST API, and fault tolerance (a local fallback catalog is used when the external data source is unavailable).
+The project applies software engineering principles: a layered architecture with clear separation of concerns, data persistence, a REST API, and fault tolerance (a local fallback catalog is used when the external data source is unavailable).
 
 ---
 
@@ -53,14 +53,14 @@ User (React form)
       v
   core.clj     orchestration: loads products and calls the engine
       |-- db.clj      returns the catalog, saves the recommendation to history
-      |-- engine.clj  COMPUTES the recommendation (AI core)
+      |-- engine.clj  COMPUTES the recommendation
       v
   web.clj      result -> JSON, returned to the user
 ```
 
 The `import.clj` layer runs before everything else — it fills the database with products when the application starts.
 
-### 2.1 Recommendation Engine (AI core)
+### 2.1 Recommendation Engine
 
 `engine.clj` is the central, "thinking" part of the application. It does not depend on any other part of the system (it only requires the standard `clojure.string` and `clojure.set` libraries), so it can be tested in isolation. It consists of two logical parts: the rule-based system and product scoring.
 
@@ -99,7 +99,7 @@ The `style-tip` function generates a short textual tip shown to the user, based 
 
 #### 2.1.2 Product scoring (content-based)
 
-The second part of the AI core is a content-based recommender. Instead of choosing products randomly or only by type, it assigns each product a numeric **score** expressing how well it matches the user's request. The score combines several factors:
+ Instead of choosing products randomly or only by type, it assigns each product a numeric **score** expressing how well it matches the user's request. The score combines several factors:
 
 - finish match between the product and the user's skin type (**+3.0**),
 - each satisfied preference, e.g. vegan, cruelty-free, matte (**+2.0** per preference),
@@ -301,8 +301,8 @@ curl -X POST http://localhost:3001/recommend \
 
 ```
 makeupadvisor/
-├── backend/                 Clojure REST API + AI core + SQLite
-│   ├── src/.../engine.clj    AI core (rules + scoring)
+├── backend/                 Clojure REST API + SQLite
+│   ├── src/.../engine.clj    (rules + scoring)
 │   ├── src/.../core.clj      orchestration
 │   ├── src/.../db.clj        database (next.jdbc + honeysql)
 │   ├── src/.../import.clj    catalog import + local seed
@@ -317,7 +317,7 @@ makeupadvisor/
 
 ## 7. References
 
-1. Makeup API — http://makeup-api.herokuapp.com/api/v1/products.json
+1. Makeup database— http://makeup-api.herokuapp.com/api/v1/products.json
 2. Recommender systems (content-based filtering) — https://en.wikipedia.org/wiki/Recommender_system
 3. Clojure — https://clojure.org/
 4. next.jdbc — https://github.com/seancorfield/next-jdbc
