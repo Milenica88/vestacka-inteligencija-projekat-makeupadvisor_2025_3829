@@ -25,7 +25,7 @@ function App() {
   return (
     <div className="app">
       <header className="hero">
-        <h1>AI Makeup Advisor</h1>
+        <h1>Makeup Advisor</h1>
         <p>
           Personalized makeup recommendations based on your skin type,
           undertone, tone, preferences, and occasion.
@@ -47,10 +47,6 @@ function App() {
           <ResultPanel result={result} />
         </div>
       </main>
-
-      <footer className="footer">
-        Project for Tools and Methods of Artificial Intelligence and Software Engineering · FON
-      </footer>
     </div>
   );
 }
