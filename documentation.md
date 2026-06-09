@@ -309,13 +309,3 @@ makeupadvisor/
 │   └── project.clj           Leiningen configuration
 └── frontend/                React application (form + results)
     └── src/                  MakeupForm, ResultPanel, ProductCard, api.js
-```
-
----
-
-## 7. References
-
-1. Makeup database— http://makeup-api.herokuapp.com/api/v1/products.json
-2. Recommender systems (content-based filtering) — https://en.wikipedia.org/wiki/Recommender_system
-3. Clojure — https://clojure.org/
-4. next.jdbc — https://github.com/seancorfield/next-jdbc
