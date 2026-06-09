@@ -212,7 +212,7 @@ POST /recommend
 }
 ```
 
-The web layer receives the request and forwards it to `core/recommend`. That function loads all 931 products from the database and calls `engine/advise`. The AI core selects a style from the rules and then ranks products by scoring. The result (abbreviated):
+The web layer receives the request and forwards it to `core/recommend`. That function loads all 931 products from the database and calls `engine/advise`. The core selects a style from the rules and then ranks products by scoring. The result:
 
 ```json
 {
