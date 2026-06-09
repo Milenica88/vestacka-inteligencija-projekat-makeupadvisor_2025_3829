@@ -33,8 +33,6 @@ The application solves this by combining two artificial intelligence approaches:
 - **Rule-based (expert) system** — domain knowledge about what suits which skin type is encoded as a set of rules.
 - **Content-based recommender** — each product is scored according to how well it matches the user's request, and products are ranked by that score.
 
-Both are de-facto standard techniques: content-based filtering powers many commercial recommender systems (Netflix, Spotify, Amazon).
-
 The project applies software engineering principles: a layered architecture with clear separation of concerns, data persistence, a REST API, and fault tolerance (a local fallback catalog is used when the external data source is unavailable).
 
 ---
