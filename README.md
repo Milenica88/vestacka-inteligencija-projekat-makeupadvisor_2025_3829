@@ -37,11 +37,16 @@ frontend/   React app
 
 ### Backend
 
-```
-cd backend
-lein run
-```
+The backend is started from a REPL inside IntelliJ IDEA (with the Cursive plugin).
 
+1. Open the `backend` folder as a project in IntelliJ.
+2. Start a REPL: **Run → Edit Configurations → + → Clojure REPL → Local**, select **Run with: Leiningen**, then run it.
+3. Once the REPL is connected, start the server by evaluating:
+
+```clojure
+(require '[vestacka-inteligencija-projekat-makeupadvisor_2025_3829.web :as web])
+(web/-main)
+```
 Starts the API on http://localhost:3001. On first run it creates the SQLite database and loads the product catalog.
 
 ### Frontend
@@ -60,7 +65,7 @@ Opens the app on http://localhost:3000.
 GET  /health          # health check -> {"status":"ok"}
 GET  /products        # full product catalog
 GET  /history         # last 10 recommendations
-GET /products/:type   # products of a single type (e.g. /products/lipstick)   
+GET  /products/:type  # products of a single type (e.g. /products/lipstick)   
 POST /recommend       # main endpoint, returns a recommendation
 ```
 
@@ -74,4 +79,5 @@ undertone    warm | cool | neutral
 skin-tone    fair | medium | deep
 occasion     everyday | work | evening | party | wedding
 preferences  any of: vegan, cruelty free, matte, dewy, budget, longwear
+
 ```
