@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./App.css";
-import MakeupForm from "./MakeupForm";
+import MakeupForm from "./components/MakeupForm";
 import ResultPanel from "./components/ResultPanel";
 import { getRecommendation } from "./api";
 
