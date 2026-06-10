@@ -18,7 +18,6 @@ Course: *Tools and Methods of Artificial Intelligence and Software Engineering*
 4. [Technologies](#4-technologies)
 5. [Usage](#5-usage)
 6. [Project Structure](#6-project-structure)
-7. [References](#7-references)
 
 ---
 
@@ -178,18 +177,19 @@ Thanks to this, the application remains usable even without internet access or w
 
 ### 2.4 Web Layer (REST API)
 
-`web.clj` exposes the application's functionality through a REST API using **Ring** and **Compojure**. Four routes are defined: a health check, returning the catalog, returning history, and the main recommendation endpoint. Middleware automatically converts JSON to Clojure maps and back, while `wrap-cors` allows the frontend (port 3000) to connect to the backend (port 3001).
+`web.clj` exposes the application's functionality through a REST API using **Ring** and **Compojure**. Five routes are defined: a health check, returning the catalog, returning history, returning products of a single type (e.g. /products/lipstick) and the main recommendation endpoint. Middleware automatically converts JSON to Clojure maps and back, while `wrap-cors` allows the frontend (port 3000) to connect to the backend (port 3001).
 
 ```clojure
 (defroutes app-routes
   (GET  "/health"    []           (response {:status "ok"}))
   (GET  "/products"  []           (response (db/all-products)))
   (GET  "/history"   []           (response (db/recent-recommendations 10)))
+  (GET  "/products/:type" [type]      (response (db/products-by-type type)))
   (POST "/recommend" {body :body} (response (core/recommend body)))
   (route/not-found {:error "Not Found"}))
 ```
 
-The `core/recommend` function, called by the `/recommend` route, ties the layers together: it loads the catalog from the database, passes it to the AI core for processing, saves the result to history, and returns it.
+The `core/recommend` function, called by the `/recommend` route, ties the layers together: it loads the catalog from the database, passes it to the core for processing, saves the result to history, and returns it.
 
 ### 2.5 Frontend
 
