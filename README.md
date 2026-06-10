@@ -22,9 +22,9 @@ Web app that recommends makeup products and styles based on skin type, undertone
 ## Project structure
 
 ```
-backend/    Clojure REST API + AI engine + SQLite
+backend/    Clojure REST API + engine + SQLite
   src/...   engine.clj, core.clj, db.clj, import.clj, web.clj
-frontend/   React app (form + results)
+frontend/   React app
 ```
 
 ## Prerequisites
@@ -57,10 +57,11 @@ Opens the app on http://localhost:3000.
 ## API endpoints
 
 ```
-GET  /health      # health check -> {"status":"ok"}
-GET  /products    # full product catalog
-GET  /history     # last 10 recommendations
-POST /recommend   # main endpoint, returns a recommendation
+GET  /health          # health check -> {"status":"ok"}
+GET  /products        # full product catalog
+GET  /history         # last 10 recommendations
+GET /products/:type   # products of a single type (e.g. /products/lipstick)   
+POST /recommend       # main endpoint, returns a recommendation
 ```
 
 ## Request format
