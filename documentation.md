@@ -259,12 +259,18 @@ Before being returned, the recommendation is saved to the `recommendations` tabl
 
 ### Run the backend
 
-```bash
-cd backend
-lein run
+The backend is started from a REPL inside IntelliJ IDEA (with the Cursive plugin).
+
+1. Open the `backend` folder as a project in IntelliJ.
+2. Start a REPL: **Run → Edit Configurations → + → Clojure REPL → Local**, select **Run with: Leiningen**, then run it.
+3. Once the REPL is connected, start the server by evaluating:
+
+```clojure
+(require '[vestacka-inteligencija-projekat-makeupadvisor_2025_3829.web :as web])
+(web/-main)
 ```
 
-The backend starts on `http://localhost:3001`. On first run it creates the database and fills the product catalog.
+The backend starts on `http://localhost:3001`. On first run it creates the database and fills the product catalog. Keep the REPL running while you use the app.
 
 ### Run the frontend
 
